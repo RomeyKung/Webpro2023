@@ -10,18 +10,18 @@
     <title>WEEK 3 - Exercise</title>
     <style>
       .example-gif {
-        max-width: 600px; 
+        max-width: 600px;
         border: 2px solid black;
       }
     </style>
   </head>
   <body>
-  <div class="navbar is-light p-5">
-        <b class="mr-4">WEEK 2</b>
-        <a href="../exercise-1/index.html" class="mr-4">Exercise 1</a>
-        <a href="../exercise-2/index.html" class="mr-4">Exercise 2</a>
-        <a href="../exercise-3/index.html" class="mr-4">Exercise 3</a>
-        <a href="" class="mr-4">Exercise DOM</a>
+    <div class="navbar is-light p-5">
+      <b class="mr-4">WEEK 2</b>
+      <a href="../exercise-1/index.html" class="mr-4">Exercise 1</a>
+      <a href="../exercise-2/index.html" class="mr-4">Exercise 2</a>
+      <a href="../exercise-3/index.html" class="mr-4">Exercise 3</a>
+      <a href="" class="mr-4">Exercise DOM</a>
     </div>
     <!-- ============================================================ -->
     <!-- ตัวอย่าง HTML -->
@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="column is-4" >
+        <div class="column is-4">
           <h5 class="is-size-4">ตะกร้าสินค้า</h5>
           <table id="cart" class="table is-fullwidth">
             <thead>
@@ -90,7 +90,7 @@
         </div>
       </div>
     </section>
-    <hr>
+    <hr />
 
     <!-- ============================================================ -->
     <!-- อธิบายโจทย์ -->
@@ -99,73 +99,108 @@
       <div class="columns">
         <div class="column">
           <p>
-            จากโค๊ด HTML ที่ให้มาด้านบน เป็น template สำหรับโปรแกรมขายของอย่างง่าย 
-            ให้เขียน javascript เพื่อให้มันทำงานได้
+            จากโค๊ด HTML ที่ให้มาด้านบน เป็น template
+            สำหรับโปรแกรมขายของอย่างง่าย ให้เขียน javascript เพื่อให้มันทำงานได้
           </p>
-          <br>
+          <br />
 
           <h5 class="is-size-4">PROBLEM 7.1</h5>
-          <p>เมื่อคลิกที่สินค้า ให้ alert แสดงชื่อสินค้า และ ราคาสินค้า โดยให้ substring เอาสัญลักษณ์ ฿ ออกไป</p>
-          <img src="./imgs/p1.gif" class="example-gif">
-          <hr>
+          <p>
+            เมื่อคลิกที่สินค้า ให้ alert แสดงชื่อสินค้า และ ราคาสินค้า โดยให้
+            substring เอาสัญลักษณ์ ฿ ออกไป
+          </p>
+          <img src="./imgs/p1.gif" class="example-gif" />
+          <hr />
 
           <h5 class="is-size-4">PROBLEM 7.2</h5>
-          <p>เมื่อคลิกที่สินค้า ให้เพิ่ม <code>&lt;tr&gt;</code> เข้าไปในตะกร้าสินค้า</p>
-          <img src="./imgs/p2.gif" class="example-gif">
-          <hr>
+          <p>
+            เมื่อคลิกที่สินค้า ให้เพิ่ม
+            <code>&lt;tr&gt;</code> เข้าไปในตะกร้าสินค้า
+          </p>
+          <img src="./imgs/p2.gif" class="example-gif" />
+          <hr />
 
           <h5 class="is-size-4">PROBLEM 7.3</h5>
           <p>จาก PROBLEM 7.2 ให้เพิ่มปุ่มลบเข้าไปในแต่ละแถวด้วย</p>
-          <img src="./imgs/p3.gif" class="example-gif">
-          <hr>
+          <img src="./imgs/p3.gif" class="example-gif" />
+          <hr />
 
           <h5 class="is-size-4">PROBLEM 7.4</h5>
           <p>ให้รวมจำนวนและราคาสินค้าในตะกร้าใน <code>&lt;tfoot&gt;</code></p>
-          <img src="./imgs/p4.gif" class="example-gif">
+          <img src="./imgs/p4.gif" class="example-gif" />
         </div>
+        
       </div>
     </section>
-    
   </body>
 
   <script>
     // Setup Event Listener
-    for (let el of document.getElementsByClassName('product')) {
-      el.addEventListener('click', onSelectProduct)
+    for (let el of document.getElementsByClassName("product")) {
+      el.addEventListener("click", onSelectProduct);
     }
 
-    function onSelectProduct (event) {
-      console.log(event.currentTarget)
-      console.log(event.currentTarget.childNodes)
+    var CART = [];
+
+    function onSelectProduct(event) {
+      // console.log(event.currentTarget)
+      // console.log(event.currentTarget.childNodes)
       // TODO: ...
       //1
-      // alert(event.currentTarget.childNodes[1].innerHTML+event.currentTarget.childNodes[3].innerHTML)
+      let name = event.currentTarget.childNodes[1].innerText;
+      let price = event.currentTarget.childNodes[3].innerText;
+      console.log("before", CART);
 
-      //2
+      CART.push({
+        name,
+        price,
+        amount: 1,
+      });
+
+      let table = document
+        .getElementById("cart")
+        .getElementsByTagName("tbody")[0];
+
+
+        table.innerHTML = ""
+
+      CART.map((x) => {
+        table.innerHTML += `
+        <th>${x.name}</th>
+        <th id="total-amount">${x.amount}</th>
+        <th id="total-price">${x.price}</th>
+        <th><button onclick="del(${x.name})">Delete</button></th>
+        `;
+      });
       
-    
-
+      console.log("after", CART);
+      //2
     }
-    function addItem(){
-            let li = document.createElement("li")
-            li.innerText = "New Item"
-            let ul = document.getElementById('ele4')
-            ul.appendChild(li)
-        }
 
-        function removeItem(){
-            let ul = document.getElementById('ele4')
-            let len = ul.childNodes.length
-            ul.removeChild(ul.childNodes[len - 1])
-        }
-        for (let i = 0; i <=10; i++){
-            if (i < 5) {
-                continue;
-                console.log(10 + i);
-            } else {
-                console.log(i);
-            }
-        }
+    function del(name){
+      let index = CART.indexOf(name)
+      CART = CART.filter(x => x.name != name)
+    }
 
+    function addItem() {
+      let li = document.createElement("li");
+      li.innerText = "New Item";
+      let ul = document.getElementById("ele4");
+      ul.appendChild(li);
+    }
+
+    function removeItem() {
+      let ul = document.getElementById("ele4");
+      let len = ul.childNodes.length;
+      ul.removeChild(ul.childNodes[len - 1]);
+    }
+    for (let i = 0; i <= 10; i++) {
+      if (i < 5) {
+        continue;
+        console.log(10 + i);
+      } else {
+        console.log(i);
+      }
+    }
   </script>
 </html>
