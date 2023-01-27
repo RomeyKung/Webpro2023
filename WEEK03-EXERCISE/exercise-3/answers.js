@@ -28,8 +28,11 @@ function findTotal (input) {
     // input เป็น array ของตัวเลข
     // TODO: ให้หาผลบวกของเลขทั้งหมดใน input
     let ans = 0;
-    for (let x of input) {
-            ans += x;
-        }
+    let ans2 = input.filter((value, index)=>{
+        return (index%2 == 0)
+    })
+    for (let x of ans2) {
+        ans += x;
+    }
     return ans
 }

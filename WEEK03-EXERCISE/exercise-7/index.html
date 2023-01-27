@@ -138,6 +138,34 @@
       console.log(event.currentTarget)
       console.log(event.currentTarget.childNodes)
       // TODO: ...
+      //1
+      // alert(event.currentTarget.childNodes[1].innerHTML+event.currentTarget.childNodes[3].innerHTML)
+
+      //2
+      
+    
+
     }
+    function addItem(){
+            let li = document.createElement("li")
+            li.innerText = "New Item"
+            let ul = document.getElementById('ele4')
+            ul.appendChild(li)
+        }
+
+        function removeItem(){
+            let ul = document.getElementById('ele4')
+            let len = ul.childNodes.length
+            ul.removeChild(ul.childNodes[len - 1])
+        }
+        for (let i = 0; i <=10; i++){
+            if (i < 5) {
+                continue;
+                console.log(10 + i);
+            } else {
+                console.log(i);
+            }
+        }
+
   </script>
 </html>
