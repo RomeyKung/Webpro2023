@@ -25,21 +25,19 @@ function start() {
 // ข้อ 2.3
 function stopTime() {
     let time = document.getElementById('Time').value
-    let miniute = time/60
-    let second = time%60
+    let miniute = Math.floor(time/60)
+    let second = Math.floor(time%60)
 
     let countDown = setInterval(() => {
-        setMin = document.getElementById('setMinute').innerText = Math.floor(miniute).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-        setSec = document.getElementById('setSecond').innerText = Math.floor(second).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-        if (second > 0 && miniute >=0) {
+        setMin = document.getElementById('setMinute').innerText = miniute.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        setSec = document.getElementById('setSecond').innerText = second.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        if (second > 0) {
             second--
-        } else if (miniute > 0 && second > 0) {
+        } else if (miniute > 0 && second == 0) {
             miniute--
             second = 59
         } else {
             clearInterval(countDown)
-            setMin = document.getElementById('setMinute').innerText = (0).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-            setSec = document.getElementById('setSecond').innerText = (0).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
         }
     }   , 100)
 
