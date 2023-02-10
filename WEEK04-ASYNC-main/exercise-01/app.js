@@ -46,7 +46,6 @@ function app2() {
   }, 1000);
 
   let max_loop = 1000000000;
-
   for (let i = 0; i < max_loop; i++) {
     let progress = (i / max_loop) * 100;
 

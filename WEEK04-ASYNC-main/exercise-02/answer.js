@@ -13,10 +13,15 @@ function showConfirm(callback) {
 // ข้อ 2.2
 function start() {
     // hint: ส่ง callback function เข้าไปเป็น argument ของ setTimeout()
+    let start = document.getElementById('start')
+    let process = document.getElementById('process')
+    let end = document.getElementById('end')
+    start.innerText = 'Program started'
     setTimeout(() => {
-        console.log("Program running")
+        console.log('Program started')
+        process.innerText = 'Hello World'
         setTimeout(() => {
-            console.log("Program ended")
+            end.innerText = 'Program ended'
         }, 3000)
     },2000)
 
@@ -38,6 +43,7 @@ function stopTime() {
             second = 59
         } else {
             clearInterval(countDown)
+
         }
     }   , 100)
 
