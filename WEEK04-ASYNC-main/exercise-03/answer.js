@@ -2,12 +2,20 @@
 function getDogDemo() {
   // hint: เรียกใช้ getAPI() โดยดึงข้อมูลจาก url = https://dog.ceo/api/breeds/image/random
   // ลอง console.log() ดูว่าข้อมูลที่ได้มาเป็นอย่างไร
-  setTimeout(() => {
-    let success = (res) => { document.getElementById('dogImg').src = res.message }
-    let error = () => { console.log('แย่ละ') }
-    getAPI('https://dog.ceo/api/breeds/image/random', success, error)
-  }, 10000);
-
+  let time = document.getElementById('dogTime')
+  let second = time.innerText
+  let countDown = setInterval(() => {
+    time.innerText = second
+    if (second > 0) {
+      second--
+    } else {
+      time.innerText = ""
+      let success = (res) => { dogImg.src = res.message }
+      let error = () => { console.log('แย่ละ') }
+      getAPI('https://dog.ceo/api/breeds/image/random', success, error)
+      clearInterval(countDown)
+    }
+  }, 100)
 
 }
 
@@ -86,7 +94,7 @@ function task(id) {
 function tester() {
   // hint : task(1).then().catch() ..... task(4)...
   // ต้องเรียก function task 4 ครั้ง เปลี่ยน id ไปเรื่อยๆ
-  for (let i = 1; i < 5 ; i++) {
+  for (let i = 1; i < 5; i++) {
     task(i).then(res => console.log(res)).catch(err => console.log(err))
   }
 
@@ -97,16 +105,16 @@ function tester() {
 // hint : เรียก getAPI() ที่ url = https://api.thecatapi.com/v1/images/search 
 // อย่าลืม console.log() ดูข้อมูลที่ได้ด้วยว่ามีโครงสร้างแบบใด
 function checkAuth(password) {
-  return new Promise((resol, reject)=>{
-    password == 'Cisco' ? resol("รหัสผ่านถูกต้อง"): reject("รหัสผ่านถูกต้อง")
+  return new Promise((resol, reject) => {
+    password == 'Cisco' ? resol("รหัสผ่านถูกต้อง") : reject("รหัสผ่านถูกต้อง")
   })
 }
 
 function fetchData(password) {
-  checkAuth(password).then((res)=>
+  checkAuth(password).then((res) =>
     alert(res),
-    getAPI('https://api.thecatapi.com/v1/images/search', (res)=>{cat.src = (res[0].url)}, (res)=> console.log('res'))
-  ).catch((res)=>alert(res))
+    getAPI('https://api.thecatapi.com/v1/images/search', (res) => { cat.src = (res[0].url) }, (res) => console.log('res'))
+  ).catch((res) => alert(res))
 }
 
 // GET API
