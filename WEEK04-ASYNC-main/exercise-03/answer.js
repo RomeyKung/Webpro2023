@@ -67,13 +67,13 @@ function evenNumber(num) {
 
   let myPromise = new Promise(function (myResolve, myReject) {
 
-    num % 2 == 0 ? myResolve() : myReject()
+    num % 2 == 0 ? myResolve('succes na') : myReject('reject na')
   });
 
   myPromise.then(
-    () => { result.innerText = 'success : ' + num + ' is an even number' }
+    (res) => { result.innerText = 'success : ' + num + ' is an even number' + res}
   ).catch(
-    () => { result.innerText = 'Error  : ' + num + ' is not an even number' }
+    (res) => { result.innerText = 'Error  : ' + num + ' is not an even number' +res}
   );
 }
 

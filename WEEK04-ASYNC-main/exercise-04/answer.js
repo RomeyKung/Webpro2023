@@ -1,4 +1,5 @@
 // ข้อ4.1
+//await
 async function getAllUser(){
     ta =document.getElementById("TA")
     //TODO
@@ -11,7 +12,15 @@ async function getAllUser(){
         ta.innerHTML = res.message
     } catch (error) {
         ta.innerHTML = error.message
+
     }
+//promise sol
+    ApiDelay().then(res=> {
+        ta.innerHTML = res.message
+    }).catch(res=>{
+        ta.innerHTML = res.message
+        console.log(1)
+    })
 }
 
 // ข้อ 4.2 
@@ -24,23 +33,35 @@ function checkAuth(password) {
             throw new Error("รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง")
     })
 }
-
+// function fetchData(password) {
+//     img = document.getElementById("cat")
+//     try {
+//       checkAuth(password).then(result => {
+//          alert(result)
+//          fetch('https://api.thecatapi.com/v1/images/search', {
+//              headers: {'Accept': 'application/json'}
+//          })
+//            .then(response => response.json())
+//            .then(data => {
+//              img.src = data[0].url
+//          })
+//      })
+//     } catch (error) {
+//      alert(error.message)
+//     }
+// }
 async function fetchData(password) {
     img = document.getElementById("cat")
     try {
-     await checkAuth(password).then(result => {
-         alert(result)
-         fetch('https://api.thecatapi.com/v1/images/search', {
+        let checkpass  = await checkAuth(password)
+        alert (reslove)
+        fetch('https://api.thecatapi.com/v1/images/search', {
              headers: {'Accept': 'application/json'}
          })
-           .then(response => response.json())
-           .then(data => {
-             img.src = data[0].url
-         })
-     })
     } catch (error) {
      alert(error.message)
     }
+    t
 }
 
 
