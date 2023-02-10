@@ -23,7 +23,7 @@ async function getAllUser(){
     })
 }
 
-// ข้อ 4.2 
+// ข้อ 4.2
 function checkAuth(password) {
     return new Promise((reslove) => {
         if (password == "In4matioN"){
@@ -54,18 +54,18 @@ async function fetchData(password) {
     img = document.getElementById("cat")
     try {
         let checkpass  = await checkAuth(password)
-        alert (reslove)
-        fetch('https://api.thecatapi.com/v1/images/search', {
-             headers: {'Accept': 'application/json'}
-         })
+        alert (checkpass)
+        let pic = await fetch('https://api.thecatapi.com/v1/images/search', { headers: {'Accept': 'application/json'} })
+        let data = await pic.json()
+        img.src = data[0].url
+
     } catch (error) {
      alert(error.message)
     }
-    t
 }
 
 
-/* 
+/*
     Function สำหรับ TA กับ อาจารย์
     นักศึกษากรุณา อย่าแก้ไข
 */
@@ -78,7 +78,7 @@ async function ApiDelay () {
 
 async function _fakeAPI() {
     const user = ["Bank", "Mac", "Takai", "Fluke"]
-    
+
     if(Math.floor(Math.random() * 3) === 1){
         throw new Error("SERVER ERROR")
     }
