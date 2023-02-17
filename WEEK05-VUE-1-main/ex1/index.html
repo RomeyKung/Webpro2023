@@ -146,9 +146,29 @@
             </p>
 
             <!-- ข้อ 6 ----------------------------------------------------------------- -->
+            <!-- 
+                <div id='ex6'>
+                    <div v-on:click="check = !check" :class ='[check ? "dropdown is-active" : "dropdown"]'>
+                        <div class="dropdown-trigger ">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span>Month Selection</span>
+                                <span class="icon is-small">  <i class="fas fa-angle-down" aria-hidden="true"></i>  </span>
+                            </button>
+                        </div>
+                        list menu
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div v-for="(month) in months" class="dropdown-content">
+                                <a class="dropdown-item">
+                                    {{month}}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                -->
 
             <div id='ex6'>
-                <div v-on:click="check = !check" :class ='[check ? "dropdown is-active" : "dropdown"]'>
+                <div @click="check = !check" class="dropdown is-active">
                     <div class="dropdown-trigger ">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
                             <span>Month Selection</span>
@@ -156,7 +176,7 @@
                         </button>
                     </div>
                     <!-- list menu -->
-                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu" v-show='check'>
                             <div v-for="(month) in months" class="dropdown-content">
                                 <a class="dropdown-item">
                                     {{month}}
@@ -165,7 +185,6 @@
                         </div>
                 </div>
             </div>
-
             <hr style="margin-top: 5rem;">
 
             <p class="my-4"><b>ข้อ 7 </b> มี Array ชื่อว่า <code>week</code> โดยเป็น Array ของ Object

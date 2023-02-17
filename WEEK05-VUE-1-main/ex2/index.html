@@ -96,8 +96,8 @@
                 </div>
 
                 <!-- Card element start here------------------------------------------>
-                <div class="card mb-4" v-for="item in cart">
-                    <div class="card-content p-0">
+                <div class="card mb-4" v-for="(item, index) in cart" :key="item.title + index">
+                    <div class="card-content p-0" @click="cart.splice(index, 1)">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-96x96">
@@ -107,6 +107,7 @@
                             </div>
                             <div class="media-content pt-2">
                                 <p class="is-5">{{item.title}}</p>
+          
                                 <p class="has-text-grey-light is-6">{{item.brand}}</p>
                                 <p class="is-6 has-text-danger">{{item.price}}</p>
 
