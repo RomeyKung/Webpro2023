@@ -364,6 +364,9 @@
                 deleteStudent(index) {
                     this.students.splice(index, 1)
                 },
+                goCheckout(){
+                    
+                }
 
 
 
@@ -406,21 +409,10 @@
                         diffVal: newVal-oldVal
                     })
                 },
-                search(newVal, oldVal) {
-                    let result = []
-                    for (let i = 0; i < this.dummyData.length; i++) {
-                        if ((this.dummyData[i].first_name+" "+this.dummyData[i].last_name).includes(newVal)) {
-                            result.push(this.dummyData[i])
-                        }
-                    }
-                    this.newData = result
-                },
-
-               
-
-
-
-
+                search(newVal, oldVal) {                   
+                    this.newData = this.dummyData.filter(person => (person.first_name + ' ' + person.last_name).includes(newVal))
+                }
+                
             }
 
         })

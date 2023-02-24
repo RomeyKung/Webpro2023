@@ -64,14 +64,14 @@
         <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
-                    <h1 class="is-size-4 has-text-weight-semibold">{{shopName}}</h1>
+                    <h1 class="is-size-4 has-text-weight-semibold">Shop</h1>
                 </a>
 
             </div>
             
             <div class="navbar-menu">
                 <div class="navbar-start">
-                    <a href="../ex1/index.html" class="navbar-item">Basic of VueJS 2</a>
+                    <!-- <a href="../ex1/index.html" class="navbar-item">Basic of VueJS 2</a> -->
                     <a href="./index.html" class="navbar-item">Shop from Vue</a>
                     <a href="./checkout.html" class="navbar-item">Checkout</a>
                 </div>
@@ -185,7 +185,7 @@
                 </div>
 
                 <!-- ปุ่ม Checkout ------------------------------------------------------------ -->
-                <a class="button is-warning mt-3" style="width: 100%;">Checkout</a>
+                <a class="button is-warning mt-3" style="width: 100%;" @click="goCheckout">Checkout</a>
 
             </div>
         </div>
@@ -285,9 +285,15 @@
 
                     }
                 },
-                removeFromCart(){
+                removeFromCart(index){
                     this.cart.splice(index,1)
+                },
+                goCheckout(){
+                    let item = JSON.stringify(this.cart)
+                    localStorage.setItem("product_in_cart", item);
+                    window.location.replace("./checkout.html");
                 }
+
             },
             computed:{
                 Total(){
@@ -295,6 +301,10 @@
                         return  total + (curr_product.price*curr_product.quantity) 
                     },0)
                 }
+            },
+            
+            created(){
+                    this.cart = JSON.parse(localStorage.product_in_cart)
             }
         })
     </script>
