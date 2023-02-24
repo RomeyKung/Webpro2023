@@ -218,8 +218,7 @@
                         <tr v-for="(log, index) in logs" :key="index">
                             <td>{{log.newVal}}</td>
                             <td>{{log.oldVal}}</td>
-                            <td :style='[(log.newVal - log.oldVal) >= 0 ? {"color":"green"} : {"color":"red"} ]'>{{log.newVal -
-                                log.oldVal}}</td>
+                            <td :style='[(log.newVal - log.oldVal) >= 0 ? {"color":"green"} : {"color":"red"} ]'>{{log.diffVal}}</td>
                         </tr>
 
                     </tbody>
@@ -305,7 +304,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in newData2" :key="index">
+                        <tr v-for="(item, index) in sort_by_gender" :key="index">
                             <td>{{item.first_name}}</td>
                             <td>{{item.last_name}}</td>
                             <td>{{item.email}}</td>
@@ -390,7 +389,7 @@
                     }
                 },
                 sort_by_gender(){
-                    return this.dummyData.filter(item => item.gender == this.gender)
+                    return this.dummyData.filter(item => item.gender.includes(this.gender))
                 }
 
 
@@ -403,7 +402,8 @@
 
                     this.logs.push({
                         newVal: newVal,
-                        oldVal: oldVal
+                        oldVal: oldVal,
+                        diffVal: newVal-oldVal
                     })
                 },
                 search(newVal, oldVal) {
@@ -416,9 +416,7 @@
                     this.newData = result
                 },
 
-                gender(newVal){
-                    this.newData2 = this.sort_by_gender
-                }
+               
 
 
 
