@@ -1,9 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const article = require('../public/article-db.json')
 
-router.get('/', function(req, res, next) {
-    var data = { title: 'Express' , name:'Rome'}
+router.get('/', (req, res)=>{
+    var Search = req.query.search
+    var Filtervalue = article.filter((item)=> item.title.toLowerCase().includes(String(Search).toLowerCase()) || Search == null)
+    var data = {title: 'Express', name: 'Rome',  article: Filtervalue }
     res.render('index', data)
 })
- 
+
 module.exports = router
