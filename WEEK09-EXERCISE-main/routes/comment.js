@@ -55,7 +55,7 @@ router.put('/comments/:commentId', async function (req, res, next) {
 router.delete('/comments/:commentId', async function (req, res, next) {
     const [rows2, fields2] = await pool.query("SELECT * FROM comments WHERE id=?", [req.params.commentId]);
     const [rows, fields] = await pool.query("DELETE FROM comments WHERE id=?", [req.params.commentId]);
-    if(rows2.length < req.params.commentId){
+    if(rows2.length == 0){
         res.json({comment: "Comments not Found."})
     }
     else{
