@@ -6,7 +6,7 @@ async function main(){
     const conn = await mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'secret',
+        password: '1234',
         database: 'webpro',
     });
 
