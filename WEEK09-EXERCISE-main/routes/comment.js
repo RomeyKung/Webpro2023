@@ -26,7 +26,7 @@ router.post('/:blogId/comments', async function (req, res, next) {
 // Update comment
 router.put('/comments/:commentId', async function (req, res, next) {
     try {
-        const [rows2, fields2] = await pool.query("SELECT * FROM comments WHERE id=?",[req.params.commentId]);
+        const [comments, fields2] = await pool.query("SELECT * FROM comments WHERE id=?",[req.params.commentId]);
         const [rows, fields] = await pool.query(
             "UPDATE comments SET blog_id=?, comment=?, comments.like=?, comment_date=?, comment_by_id=? WHERE id=?",
             [
@@ -37,7 +37,7 @@ router.put('/comments/:commentId', async function (req, res, next) {
                 req.body.comment_by_id,
                 req.params.commentId
             ]);
-            if (rows2.length == 0){
+            if (comments.length == 0){
                 res.json({comment: "Not has comment."})
             }
             else{
@@ -53,9 +53,9 @@ router.put('/comments/:commentId', async function (req, res, next) {
 
 // Delete comment
 router.delete('/comments/:commentId', async function (req, res, next) {
-    const [rows2, fields2] = await pool.query("SELECT * FROM comments WHERE id=?", [req.params.commentId]);
+    const [comments, fields2] = await pool.query("SELECT * FROM comments WHERE id=?", [req.params.commentId]);
     const [rows, fields] = await pool.query("DELETE FROM comments WHERE id=?", [req.params.commentId]);
-    if(rows2.length == 0){
+    if(comments.length == 0){
         res.json({comment: "Comments not Found."})
     }
     else{
