@@ -4,11 +4,6 @@ const pool = require("../config");
 
 router = express.Router();
 
-
-
-
-
-
 // Require multer for file upload
 const multer = require('multer')
 // SET STORAGE
@@ -189,15 +184,6 @@ router.get("/blogs/:id", function (req, res, next) {
       return next(err);
     });
 });
-
-
-
-
-
-
-
- 
-
 
 
 exports.router = router;
