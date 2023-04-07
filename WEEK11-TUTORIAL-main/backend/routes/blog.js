@@ -69,7 +69,7 @@ router.post('/blogs', upload.single('myImage'), async function (req, res, next) 
     if (!file) {
       const error = new Error("Please upload a file");
       error.httpStatusCode = 400;
-      return next(error);
+      res.status(400).json(error.message);
     }
 
     const title = req.body.title;
@@ -89,8 +89,8 @@ router.post('/blogs', upload.single('myImage'), async function (req, res, next) 
       const blogId = results[0].insertId;
 
       await conn.query(
-        "INSERT INTO images(blog_id, file_path) VALUES(?, ?);",
-        [blogId, file.path.substr(6)])
+        "INSERT INTO images(blog_id, file_path, main) VALUES(?, ?, ?);",
+        [blogId, file.path.substr(6) , 1])
 
       await conn.commit()
       // res.send("success!");
@@ -173,12 +173,16 @@ router.get("/blogs/:id", function (req, res, next) {
       const blogs = results[0];
       const comments = results[1];
       const images = results[2];
+
+
       res.json({
         blog: blogs[0][0],
         comments: comments[0],
         images: images[0],
         error: null,
       });
+ 
+
     })
     .catch((err) => {
       return next(err);

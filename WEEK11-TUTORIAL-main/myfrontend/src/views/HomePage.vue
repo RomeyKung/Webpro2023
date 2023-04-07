@@ -48,7 +48,9 @@
               <footer class="card-footer">
                 <router-link :to="{ name: 'BlogDetail', params: { id: blog.id } }" class="card-footer-item"> Read more...
                 </router-link>
-                <a class="card-footer-item" @click="likeBlog2(blog)">
+                <!-- <router-link :to="`/blog/${blog.id}`" class="card-footer-item"> Read more...
+                </router-link> -->
+                <a class="card-footer-item" @click="likeBlog2(blog)" >
                   <span class="icon-text">
                     <span>{{ blog.like }}</span>
                     <span class="icon">
@@ -73,14 +75,13 @@ export default {
     return {
       blogs: null,
       search: this.$route.query.search,
-      imageSrc: null
     }
   },
   created() {
     axios.get("http://localhost:3000/", { params: { search: this.search } })
       .then((response) => {
         this.blogs = response.data.blogs;
-        console.log(this.blogs)
+        // console.log(this.blogs)
       })
       .catch((err) => {
         console.log(err);
@@ -99,8 +100,11 @@ export default {
     async likeBlog2(blog) {
       try {
         const response = await axios.post(`http://localhost:3000/blogs/addlike/${blog.id}`);
-        console.log(response.data);
-        window.location.reload();
+        console.log(response.data.blogs);
+        this.blogs = response.data.blogs
+
+
+
       } catch (error) {
         console.log(error);
       }

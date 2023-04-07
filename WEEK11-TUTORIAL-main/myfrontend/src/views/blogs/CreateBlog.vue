@@ -74,13 +74,15 @@ export default {
             title: '',
             content: '',
             status: '01',
-            pinned: false,
-            file: null
+            pinned: 0,
+            file: null,
+            filename: null
         }
     },
     methods: {
       handleFileUpload(){
           this.file = this.$refs.file.files[0];
+          this.filename = this.$refs.file.files[0].name
       },
       submit(){
           var formData = new FormData();
@@ -88,13 +90,14 @@ export default {
           formData.append("title", this.title)
           formData.append("content", this.content)
           formData.append("status", this.status)
-          formData.append("pinned", this.pinned)
+          formData.append("pinned", Number(this.pinned))
           axios.post('http://localhost:3000/blogs', formData, {
               headers: {
               'Content-Type': 'multipart/form-data'
               }
           }).then(response => {
             response
+          
               this.$router.push({path: '/'}) // Success! -> redirect to home page
           })
           .catch(error => {

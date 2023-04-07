@@ -38,14 +38,15 @@ router.post('/:blogId/comments', upload.single('myImage'), async function(req, r
           "INSERT INTO images(blog_id, file_path, comment_id) VALUES(?, ?, ?);",
           [req.params.blogId, file.path.substr(6), Id])
       }
-
       await conn.commit()
+      res.redirect('http://localhost:3000/blogs/'+ req.params.blogId)
     } catch (err) {
       await conn.rollback();
       next(err);
     } finally {
       console.log('finally')
-      res.send("success! Dog");
+
+  
       conn.release();
     }
 });

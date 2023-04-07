@@ -135,8 +135,10 @@ export default {
                     'Content-Type': 'multipart/form-data'
                 }
             }).then(response => {
-                location.reload()
-                console.log(response)
+                // this.blogs = response.data.blogs
+                // location.reload()
+                console.log(response.data)
+                this.blogs = response.data
             })
                 .catch(error => {
                     console.log(error.message);
