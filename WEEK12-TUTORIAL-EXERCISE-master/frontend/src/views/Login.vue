@@ -47,7 +47,7 @@
         </button>
 
         <p class="my-3">
-          Don't have an account yet? <a href="/signup.html">Sign up</a>
+          Don't have an account yet? <a href="/signup.vue">Sign up</a>
         </p>
       </div>
     </div>

@@ -51,7 +51,7 @@ router.post('/:blogId/comments', isLoggedIn,async function (req, res, next) {
     }
 });
 
-router.put('/comments/:commentId', isLoggedIn,commentOwner,async function (req, res, next) {
+router.put('/comments/:commentId', isLoggedIn, commentOwner,async function (req, res, next) {
     try {
         const [rows1, fields1] = await pool.query(
             'UPDATE comments SET comment=? WHERE id=?', [req.body.comment, req.params.commentId]
@@ -64,7 +64,7 @@ router.put('/comments/:commentId', isLoggedIn,commentOwner,async function (req, 
 });
 
 // Delete comment
-router.delete('/comments/:commentId', isLoggedIn,commentOwner, async function (req, res, next) {
+router.delete('/comments/:commentId', isLoggedIn, commentOwner, async function (req, res, next) {
     try {
         const [rows1, fields1] = await pool.query(
             'DELETE FROM comments WHERE id=?', [req.params.commentId]

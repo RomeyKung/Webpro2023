@@ -30,7 +30,7 @@
             </a>
             <div class="navbar-dropdown">
               <a class="navbar-item">Profile</a>
-              <a class="navbar-item">Log out</a>
+              <a @click="logout()" class="navbar-item">Log out</a>
             </div>
           </div>
 
@@ -75,6 +75,10 @@ export default {
         this.user = res.data
       })
     },
+    logout(){
+      localStorage.clear()
+      this.$router.go({ path: this.$router.push('/user/login') });
+    }
   }
 }
 </script>

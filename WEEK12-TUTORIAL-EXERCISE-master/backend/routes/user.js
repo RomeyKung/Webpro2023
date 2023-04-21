@@ -38,7 +38,7 @@ const signupSchema = Joi.object({
     username: Joi.string().required().min(5).max(20).external(usernameValidator),
 })
 router.post('/user/signup', async (req, res, next) => {
-    try {
+    try { 
         await signupSchema.validateAsync(req.body, { abortEarly: false })
     } catch (err) {
         return res.status(400).send(err)
