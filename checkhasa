@@ -1,0 +1,9 @@
+const email = req.body.email;
+const [rows] = await db.query('SELECT COUNT(*) AS count FROM users WHERE email = ?', [email]);
+const { count } = rows[0];
+
+if (count > 0) {
+  const error = new Error('Email is already registered');
+  error.status = 400;
+  throw error;
+}

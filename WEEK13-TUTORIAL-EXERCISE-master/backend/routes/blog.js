@@ -9,6 +9,8 @@ router = express.Router();
 // Require multer for file upload
 const multer = require("multer");
 // SET STORAGE
+
+// กำหนด disk storage สำหรับ multer
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, "./static/uploads");
@@ -169,6 +171,7 @@ router.get("/blogs/:id", function (req, res, next) {
     });
 });
 
+//upload image to blog
 router.put("/blogs/:id", upload.array("myImage", 5), async function (req, res, next) {
   // Your code here
   const file = req.files;
