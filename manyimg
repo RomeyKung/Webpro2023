@@ -18,3 +18,4 @@ app.post('/photos', upload.array('photos', 5), function (req, res, next) {
   // req.files จะมีค่าเป็น array ของ object โดยแต่ละ object จะเก็บข้อมูลของไฟล์แต่ละไฟล์ที่อัปโหลด
   console.log(req.files)
 })
+ 
